@@ -1,0 +1,19 @@
+.counter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.counter-span {
+    margin-left: 0.7rem;
+    font-size: 1.5rem;
+}
+
+.counter-span--green {
+    color: green;
+}
+
+.counter-span--red {
+    color: red;
+}

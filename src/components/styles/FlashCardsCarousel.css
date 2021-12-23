@@ -1,0 +1,14 @@
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vmin;
+    height: 100vmin;
+    text-align: center;
+}
+
+.revealed-options-container {
+    margin: 2rem;
+    height: 8rem;
+}

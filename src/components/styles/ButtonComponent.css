@@ -1,0 +1,20 @@
+.button-container {
+    padding: 7px;
+    border: 1px solid #aaa;
+    border-radius: 7px;
+    box-shadow: 0 1px 2px 0 rgb(84 85 25 / 35%);
+    /* background-color: rgb(36, 207, 13); */
+    cursor: pointer;
+    width: fit-content;
+    height: 2.3rem;
+}
+
+.button-image--small {
+    width: 32px;
+    height: 32px;
+}
+
+.button-image--large {
+    width: 48px;
+    height: 48px;
+}

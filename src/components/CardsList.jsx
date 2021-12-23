@@ -1,7 +1,7 @@
 import React from 'react';
+import './styles/CardsList.css';
 
 const CardsList = ({ data, handleDelete, handleEdit }) => {
-    // console.log('CardsList: ', data);
     return (
         <div className='todo-cards-container'>
             {data.map((item) => (
