@@ -7,10 +7,8 @@ const CardsList = ({ data, handleDelete, handleEdit }) => {
             {data.map((item) => (
                 <div key={item.id} className='todo-card'>
                     <div className='todo-card-header'>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <p>{item.location}</p>
-                        <p>{item.modifiedAt.toLocaleString()}</p>
+                        <h3>{item.question}</h3>
+                        <p>{item.answer}</p>
                     </div>
                     <div className='todo-card-footer'>
                         <button onClick={() => handleEdit(item)}>Edit</button>
