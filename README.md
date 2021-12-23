@@ -1,1 +1,3 @@
-# react_flash_cards
+# Flash Cards
+
+React weekend assignment
