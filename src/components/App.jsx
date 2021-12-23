@@ -10,12 +10,14 @@ import {
     saveToLocalStorage,
 } from '../data/utils.js';
 import './styles/App.css';
+import { v4 as uuidv4 } from 'uuid';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
+            updateNotifier: 0,
             isLoading: true,
             isError: false,
         };
@@ -26,27 +28,36 @@ class App extends React.Component {
         const cards = getFromLocalStorage('cards') || flashCards;
         this.setState({
             data: cards,
+            updateNotifier: Math.random(),
             isLoading: false,
         });
         saveToLocalStorage('cards', cards);
     }
 
     handleCardDelete = (card) => {
+        console.log('card: ', card);
         const { data } = this.state;
         const newData = data.filter((item) => item.id !== card.id);
         this.setState({
             data: newData,
+            updateNotifier: Math.random(),
         });
         saveToLocalStorage('cards', newData);
     };
 
-    handleCardEdit = (card) => {
+    handleCardEdit = (card, isNew) => {
         const { data } = this.state;
         const newData = data;
-        const index = data.findIndex((item) => item.id === card.id);
-        newData[index] = card;
+        if (isNew) {
+            card.id = uuidv4();
+            newData.push(card);
+        } else {
+            const index = data.findIndex((item) => item.id === card.id);
+            newData[index] = card;
+        }
         this.setState({
             data: newData,
+            updateNotifier: Math.random(),
         });
         saveToLocalStorage('cards', newData);
     };
@@ -64,6 +75,7 @@ class App extends React.Component {
                         <Route path='/manage' exact>
                             <CardsList
                                 data={this.state.data}
+                                updateNotifier={this.state.updateNotifier}
                                 handleEdit={this.handleCardEdit}
                                 handleDelete={this.handleCardDelete}
                             />

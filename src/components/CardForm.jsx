@@ -15,9 +15,6 @@ class TodoForm extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.item.question !== this.props.item.question) {
-            console.log('prevProps: ', prevProps);
-            console.log('this.props: ', this.props);
-
             const { question, answer } = this.props.item;
             this.setState({
                 item: this.props.item,
@@ -49,7 +46,7 @@ class TodoForm extends React.Component {
             <Fragment>
                 <h1>{`${this.state.isNew ? 'New' : 'Update'} Card`}</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <InputTextArea
+                    <InputText
                         inputName='question'
                         label='Question'
                         inputValue={this.state.question}
