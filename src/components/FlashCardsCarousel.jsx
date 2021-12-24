@@ -14,6 +14,7 @@ class FlashCardsCarousel extends React.Component {
             wrong: 0,
             completed: 0,
             isRevealed: false,
+            finishedCards: false,
             isError: false,
         };
     }
@@ -23,8 +24,6 @@ class FlashCardsCarousel extends React.Component {
             data: this.props.data,
             currentCard: this.props.data[0],
         });
-        console.log('this.state.data: ', this.state.data);
-        console.log('this.state.props: ', this.props);
     }
 
     componentDidUpdate(prevProps) {
@@ -45,8 +44,11 @@ class FlashCardsCarousel extends React.Component {
                 currentCard: data[newCardIndex],
                 isRevealed: false,
             });
+        } else {
+            this.setState({
+                finishedCards: true,
+            });
         }
-        //TODO else show end of cards message
     };
 
     handleRevealCardClick = () => {
@@ -73,7 +75,47 @@ class FlashCardsCarousel extends React.Component {
         this.handleNextClick();
     };
 
-    render() {
+    handleReShuffle = () => {
+        const { data } = this.state;
+        /**
+         ** This is a very simple shuffle algorithm.
+         ** For every 2 items in the array(a, b) array sort method
+         ** will put a first if the comparison of a and b is less than 0
+         ** and put b first if the comparison of a and b is greater than 0.
+         ** below code randomly returns a positive or negative numbers thus
+         ** shuffling the array.
+         */
+        const newData = data.sort(() => Math.random() - 0.5);
+        this.setState({
+            data: newData,
+            currentCard: newData[0],
+            correct: 0,
+            wrong: 0,
+            completed: 0,
+            isRevealed: false,
+            finishedCards: false,
+        });
+    };
+
+    renderCompleted() {
+        return (
+            <div className='flash-cards-carousel__completed'>
+                <h2>You have completed all off the cards!</h2>
+                <p>
+                    You got {this.state.correct} correct and {this.state.wrong}{' '}
+                    wrong.
+                </p>
+                <div className='button-row'>
+                    <ButtonComponent
+                        label='Reshuffle'
+                        parentClickHandler={this.handleReShuffle}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    renderCards() {
         return (
             <div className='carousel-container'>
                 <h5>
@@ -125,6 +167,12 @@ class FlashCardsCarousel extends React.Component {
                 )}
             </div>
         );
+    }
+
+    render() {
+        return this.state.finishedCards
+            ? this.renderCompleted()
+            : this.renderCards();
     }
 }
 
