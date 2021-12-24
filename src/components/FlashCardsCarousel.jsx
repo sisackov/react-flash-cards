@@ -37,13 +37,12 @@ class FlashCardsCarousel extends React.Component {
     }
 
     handleNextClick = () => {
-        const { currentCard, data, completed } = this.state;
+        const { currentCard, data } = this.state;
         const newCardIndex =
             data.findIndex((card) => card.id === currentCard.id) + 1;
         if (newCardIndex < data.length) {
             this.setState({
                 currentCard: data[newCardIndex],
-                completed: completed + 1,
                 isRevealed: false,
             });
         }
@@ -57,17 +56,19 @@ class FlashCardsCarousel extends React.Component {
     };
 
     handleCorrect = () => {
-        const { correct } = this.state;
+        const { correct, completed } = this.state;
         this.setState({
             correct: correct + 1,
+            completed: completed + 1,
         });
         this.handleNextClick();
     };
 
     handleWrong = () => {
-        const { wrong } = this.state;
+        const { wrong, completed } = this.state;
         this.setState({
             wrong: wrong + 1,
+            completed: completed + 1,
         });
         this.handleNextClick();
     };

@@ -14,6 +14,7 @@ class FlashCard extends React.Component {
         if (prevProps.card !== this.props.card) {
             this.setState({
                 card: this.props.card,
+                isRevealed: false,
             });
         } else if (prevProps.isRevealed !== this.props.isRevealed) {
             this.setState({
